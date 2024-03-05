@@ -1,0 +1,23 @@
+name: Build RTL8822CS Driver
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install build dependencies
+      run: sudo apt-get install build-essential linux-headers-$(uname -r)
+
+    - name: Build and Install RTL8822CS Driver
+      run: |
+        cd rtlwifi_new
+        make
+        sudo make install
